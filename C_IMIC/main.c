@@ -6,11 +6,15 @@ void main()
 	float a;
 	printf("Nhap diem trung binh: ");
 	scanf("%f", &a);
-	if (a >= 8)
+	if (a > 10)
+	{
+		printf("Diem khong hop le");
+	}
+	else if (a >= 8)
 	{
 		printf("Loai gioi");
 	}
-	else if (a >= 6.5 && a < 8)
+	else if (a >= 6.5)
 	{
 		printf("Loai kha");
 	}
