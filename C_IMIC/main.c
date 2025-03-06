@@ -8,7 +8,7 @@ void main()
 	scanf("%f", &a);
 	printf("Nhap gia tri cua b: ");
 	scanf("%f", &b);
-	if (a-b > 0)
+	if (b - a < 0)
 	{
 		printf("a la so lon nhat");
 	}
