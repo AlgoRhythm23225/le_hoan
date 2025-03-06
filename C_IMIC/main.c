@@ -3,17 +3,20 @@
 
 void main()
 {
-	float a, b;
-	printf("Nhap gia tri cua a: ");
+	float a;
+	printf("Nhap diem trung binh: ");
 	scanf("%f", &a);
-	printf("Nhap gia tri cua b: ");
-	scanf("%f", &b);
-	if (b - a < 0)
+	if (a >= 8)
 	{
-		printf("a la so lon nhat");
+		printf("Loai gioi");
+	}
+	else if (a >= 6.5 && a < 8)
+	{
+		printf("Loai kha");
 	}
 	else
 	{
-		printf("b la so lon nhat");
+		printf("Loai trung binh");
 	}
+	
 }
