@@ -3,40 +3,25 @@
 
 void main()
 {
-	int n;
-		printf("Enter a number: ");
-		scanf("%d", &n);
-		switch (n)
+	int n,s;
+	printf("Enter password: ");
+	scanf("%d", &n);
+	switch (n)
+	{
+	case 1234:
+		printf("Enter the number of money you want to withdraw: ");
+		scanf("%d", &s);
+		if (s > 10000)
 		{
-		case 1:
-			printf("one");
-			break;
-		case 2:
-			printf("two");
-			break;
-		case 3:
-			printf("three");
-			break;
-		case 4:
-			printf("four");
-			break;
-		case 5:
-			printf("five");
-			break;
-		case 6:
-			printf("six");
-			break;
-		case 7:
-			printf("seven");
-			break;
-		case 8:
-			printf("eight");
-			break;
-		case 9:
-			printf("nine");
-			break;
-		default:
-			printf("Greater than 9");
-			break;
+			printf("To much");
 		}
+		else
+		{
+			printf("Please take your %d", s);
+		}
+		break;
+	default:
+		printf("Wrong password");
+		break;
+	}		
 }
