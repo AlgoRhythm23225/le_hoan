@@ -4,28 +4,24 @@
 
 void main()
 {
-	char check;
 	int a;
-	printf("Nhap so nguyen khac 0\n");
-	while (1)
+	char c;
+	while(1)
 	{
-		if (scanf("%d%c", &a, &check) != 2 || check !='\n')
+		printf("Enter a number: ");
+		if (scanf("%d%c", &a, &c) != 2 || c != '\n')
 		{
-			printf("Vui long nhap so nguyen\n");
+			printf("Invalid\n");
 			while (getchar() != '\n');
 			continue;
 		}
-		if (a > 0)
+		if (a % 2 == 0)
 		{
-			printf("Ban vua nhap so duong\n");
-		}
-		else if (a == 0)
-		{
-			printf("Nhap 0 lam gi vay\n");
+			printf("So chan\n");
 		}
 		else
 		{
-			printf("Ban vua nhap so am\n");
+			printf("So le\n");
 		}
 	}
 }
