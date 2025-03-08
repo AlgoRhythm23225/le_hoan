@@ -4,48 +4,53 @@
 
 void main()
 {
-	float a;
+	float a, tien_dien = 0;
 	char c;
 	while (1)
 	{
-		printf("Nhap so kWh su dung: ");
+		printf("Nhap so kWh: ");
 		if (scanf("%f%c", &a, &c) != 2 || c != '\n')
 		{
 			printf("Vui long nhap so\n");
 			while (getchar() != '\n');
 			continue;
-		}		 
+		}
 		if (a < 0)
 		{
-			printf("Nhap cai gi day\n");
+			printf("Vui long nhap so duong\n");
+			continue;
 		}
-		else if (a == 0)
+		if (a == 0)
 		{
-			printf("Thang nay khong dung dien ha\n");
+			printf("Thang nay khong xai dien ha\n");
+			continue;
 		}
-		else if (a > 0 && a <= 50)
+		if (a > 400)
 		{
-			printf("Thang nay het %.f tien dien\n", a * 1678);
+			tien_dien +=( a - 400) * 2927;
+			a = 400;
 		}
-		else if (a >= 51 && a <= 100)
-		{
-			printf("Thang nay het %.f tien dien\n", 50 * 1678 + ( a - 50 ) * 1734);
-		}
-		else if (a >= 101 && a <= 200)
-		{
-			printf("Thang nay het %.f tien dien\n", 50 * 1678 + 50 * 1734 + ( a - 100 ) * 2014);
+		if (a > 300)
+			{
+				tien_dien +=( a - 300) * 2834;
+				a = 300;
 			}
-		else if (a >= 201 && a <= 300)
-		{
-			printf("Thang nay het %.f tien dien\n", 50 * 1678 + 50 * 1734 + 100 * 2014 + ( a - 200 ) * 2536);
-		}
-		else if (a >= 301 && a <= 400)
-		{
-			printf("Thang nay het %.f tien dien\n", 50 * 1678 + 50 * 1734 + 100 * 2014 + 100 * 2536 + ( a - 300 ) * 2834);
-		}
-		else
-		{
-			printf("Thang nay het %.f tien dien\n", 50 * 1678 + 50 * 1734 + 100 * 2014 + 100 * 2536 + 100 * 2834 + ( a - 400 ) * 2927);
-		}	
+		if (a > 200)
+			{
+				tien_dien +=( a - 200) * 2536;
+				a = 200;
+			}
+		if (a > 100)
+			{
+				tien_dien +=( a - 100) * 2014;
+				a = 100;
+			}
+		if (a > 50)
+			{
+				tien_dien +=( a - 50) * 1734;
+				a = 50;
+			}
+		tien_dien += a * 1678;
+		printf("Thang nay het %.f tien dien\n", tien_dien);
 	}
 }
