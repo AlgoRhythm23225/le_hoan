@@ -3,12 +3,15 @@
 
 int main()
 {
-    for (int i = 1; i <= 10; i++)
-    {
-        for (int j = 2; j <= 9; j++)
-        {
-            printf("%d x %d = %d  ", j, i, j * i);
-        } 
-        printf("\n");
-    } 
+	int i = 0, n = 0;
+	while (i != 1234)
+	{
+		printf("Enter password: ");
+		scanf("%d", &i);
+		n++;
+		if (n == 3)
+			break;
+    }
+	if (n == 3) printf("Please try again after 50 years");
+	else printf("Correct");
 }
