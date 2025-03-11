@@ -3,12 +3,12 @@
 
 int main()
 {
-    for (int i = 2; i <= 9; i++)
+    for (int i = 1; i <= 10; i++)
     {
-        for (int j = 1; j <= 10; j++)
+        for (int j = 2; j <= 9; j++)
         {
-            printf("%d x %d = %d\n", i, j, j * i);
+            printf("%d x %d = %d  ", j, i, j * i);
         } 
+        printf("\n");
     } 
-    return 0;
 }
