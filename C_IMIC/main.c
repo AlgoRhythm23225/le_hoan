@@ -9,5 +9,5 @@ int main()
 		printf("Enter a number: ");
 		scanf("%d", &n);
 		i+=1;
-	} while (n != 0 && i != 3);
+	} while (n != 0 && i != 5);
 }
