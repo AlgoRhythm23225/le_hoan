@@ -3,16 +3,11 @@
 
 int main()
 {
-	int n;
-	while (1)
+	int n, i = 0;
+	do
 	{
-		int s = 1;
-		printf("Nhap n: ");
+		printf("Enter a number: ");
 		scanf("%d", &n);
-		for (int i = 1; i <= n; i++)
-		{
-			s *= i;
-		}
-		printf("Luy thua cua %d la: %d\n", n, s);
-	}
+		i+=1;
+	} while (n != 0 && i != 3);
 }
