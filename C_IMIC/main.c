@@ -3,13 +3,16 @@
 
 int main()
 {
-	int n, s = 0;
-	printf("Nhap n so nguyen dau tien: ");
-	scanf("%d", &n);
-	for (int i = 1; i <= n; i++)
+	int n;
+	while (1)
 	{
-		if (i % 2 == 0)
-			s += i;
+		int s = 1;
+		printf("Nhap n: ");
+		scanf("%d", &n);
+		for (int i = 1; i <= n; i++)
+		{
+			s *= i;
+		}
+		printf("Luy thua cua %d la: %d\n", n, s);
 	}
-	printf("Tong cua %d so chan dau tien la: %d", n, s);
 }
