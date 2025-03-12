@@ -4,15 +4,15 @@
 int main()
 {
 	int n;
-	float m, a, tien_lai = 0;
-	printf("Nhap so tien can gui: ");
-	scanf("%f", &m);
-	printf("Nhap so nam gui: ");
+	printf("Enter a number: ");
 	scanf("%d", &n);
-	for (int i = 1; i <= n; i++)
+	for (int i = 0; i < n; i++)
 	{
-		tien_lai = 8.2 / 100 * m;
-		m += tien_lai;
+		printf("%d ", i);
 	}
-	printf("So tien lai sau %d nam la %.f", n, m);
+	printf("\n");
+	for (int i = n - 1; i >= 0; i--)
+	{
+		printf("%d ", i);
+	}
 }
