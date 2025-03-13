@@ -9,11 +9,7 @@ int main()
 	{
 		printf("Nhap so %d: ", i);
 		scanf("%d", &arr[i]);
-	}
-
-	for (int i = 0; i < 10; i++)
-	{
 		tong += arr[i];
 	}
 	printf("%d", tong);
-	}
+}
