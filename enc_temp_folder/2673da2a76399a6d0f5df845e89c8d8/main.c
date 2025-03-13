@@ -18,5 +18,5 @@ int main()
 		else arr[i + 1] = arr[i + 1];
 		s = arr[i + 1];
 	}
-	printf("So lon nhat la : %d", s);
+	printf("%d", s);
 }
