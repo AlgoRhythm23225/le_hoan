@@ -3,17 +3,17 @@
 
 int main()
 {
-	int arr[10];
+	int arr[10] = { 0 };
 	int tong = 0;
-	for (int i = 0; i <= 10; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		printf("Nhap so %d: ", i);
 		scanf("%d", &arr[i]);
 	}
 
-	for (int j = 0; j <= 10; j++)
+	for (int i = 0; i < 10; i++)
 	{
-		tong += arr[j];
+		tong += arr[i];
 	}
 	printf("%d", tong);
-}
+	}
