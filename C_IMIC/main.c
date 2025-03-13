@@ -3,25 +3,13 @@
 
 int main()
 {
-	int arr[10] = { 0 };
-	int s = 0, k = 0;
-	for (int i = 0; i < 10; i++)
+	char str[] = "xiN cHao";
+	int n = sizeof(str) - sizeof(str[0]), k = 0;
+	printf("%d", n);
+	for (int i = 0; i < n; i++)
 	{
-		printf("Nhap so %d: ", i);
-		scanf("%d", &arr[i]);
+		if (str[i] > 65 && str[i] < 90)
+			k++;
 	}
-
-	int so_lon_nhat = 0;
-	int so_luong_doi_tuong = sizeof(arr) / sizeof(arr[0]);
-	for (int i = 0; i < 10; i++)
-	{
-		if (so_lon_nhat < arr[i])
-			so_lon_nhat = arr[i];	 
-	}
-
-	for (int i= 0; i < 10; i++)
-	{
-		if(arr[i]==so_lon_nhat)
-			printf("%d ",i);
-	}
+	printf("Co %d ky tu viet hoa", k);
 }
