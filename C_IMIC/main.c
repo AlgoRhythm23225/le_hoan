@@ -1,31 +1,47 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <math.h>
 
 int main()
 {
-	while (1)
+	int so_tien_rut;
+	int n_500 = 0,
+		n_200 = 0,
+		n_100 = 0,
+		n_50 = 0,
+		s = 0;
+	printf("Nhap so tien can rut (Boi so cua 50): ");
+	while (scanf("%d", &so_tien_rut) != 1 || so_tien_rut % 50 != 0)
 	{
-		//Tich phan chay bang com
-		double a, b, s = 0;
-		printf("Nhap a và b: ");
-		scanf("%lf%lf", &a, &b);
-		double h = (b - a) / 1000;
-		int i = 0;
-		do
-		{		
-			s += (pow(a + i * h, 2) + pow(a + (i + 1) * h, 2)) * h / 2;
-			i++;
-		} while (i != 999);
-		printf("Chia nho: %.lf\n", s);
-
-		//Tich phan bang cong thuc
-
-		double s2;
-		double sai_so;
-		s2 = pow(b, 3) / 3 - pow(a, 3) / 3;
-		sai_so = 100 * fabs((s2 - s) / s2);
-		printf("Ly tuong: %.lf\nSai so: %.2lf%%\n", s2, sai_so);
+		printf("Nhap lai: ");
+		s++;
+		if (s > 6 && s <=10)
+			printf("May co rut tien khong?");
+		if (s > 10)
+			printf("Anh nhac em!");
 	}
-
+		
+	while (so_tien_rut > 0)
+	{
+		if (so_tien_rut >= 500)
+		{
+			so_tien_rut -= 500;
+			n_500++;
+		}
+		if (so_tien_rut >= 200)
+		{
+			so_tien_rut -= 200;
+			n_200++;
+		}
+		if (so_tien_rut >= 100)
+		{
+			so_tien_rut -= 100;
+			n_100++;
+		}
+		if (so_tien_rut >= 50)
+		{
+			so_tien_rut -= 50;
+			n_50++;
+		}		
+	}
+	printf("Da rut:\n%d to 500k\n%d to 200k\n%d to 100k\n%d to 50k", n_500, n_200, n_100, n_50);
 }
