@@ -3,13 +3,14 @@
 
 int main()
 {
-	char str[] = "xiN cHao";
-	int n = sizeof(str) - sizeof(str[0]), k = 0;
-	printf("%d", n);
-	for (int i = 0; i < n; i++)
+	int a, b;
+	printf("Nhap 2 so: ");
+	scanf("%d%d", &a, &b);
+	while (b != 0)
 	{
-		if (str[i] > 65 && str[i] < 90)
-			k++;
+		int temp = b;
+		b = a % b;
+		a = temp;
 	}
-	printf("Co %d ky tu viet hoa", k);
+	printf("Uoc chung lon nhat la: %d", a);
 }
