@@ -1,47 +1,108 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <string.h>
 
 int main()
 {
-	int so_tien_rut;
-	int n_500 = 0,
-		n_200 = 0,
-		n_100 = 0,
-		n_50 = 0,
-		s = 0;
-	printf("Nhap so tien can rut (Boi so cua 50): ");
-	while (scanf("%d", &so_tien_rut) != 1 || so_tien_rut % 50 != 0)
+	int n;
+	char a[12];
+	printf("Nhap so nguyen tu 6 chu so tro xuong ( khong nhap so co so 0 do chuong trinh chua hoan thien :< ): ");
+	scanf("%d", &n);
+
+	//dem ky tu
+	sprintf(a, "%d", n);
+	int count = strlen(a);
+	for (int i = 0; i < count; i++)
 	{
-		printf("Nhap lai: ");
-		s++;
-		if (s > 6 && s <=10)
-			printf("May co rut tien khong?");
-		if (s > 10)
-			printf("Anh nhac em!");
+		switch (a[i])
+		{
+			case '1':
+				printf("mot");
+				break;
+			case '2':
+				printf("hai");
+				break;
+			case '3':
+				printf("ba");
+				break;
+			case '4':
+				printf("bon");
+				break;
+			case '5':
+				printf("nam");
+				break;
+			case '6':
+				printf("sau");
+				break;
+			case '7':
+				printf("bay");
+				break;
+			case '8':
+				printf("tam");
+				break;
+			case '9':
+				printf("chin");
+				break;
+		}
+		if (i != count - 1) printf(" ");
+	
+
+		switch (count - i)
+		{
+			case 7:
+				printf("trieu ");
+				break;
+			case 6:
+				printf("tram ");
+				break;
+			case 5:
+				printf("muoi ");
+				break;
+			case 4:
+				printf("nghin ");
+				break;
+			case 3:
+				printf("tram ");
+				break;
+			case 2:
+				if (a[i] == '0') 
+					printf("linh ");
+				else 
+					printf("muoi ");
+				break;
+			case 1:
+				switch (a[i])
+				{
+					case 1:	
+						printf("mot");
+						break;
+					case 2:	
+						printf("hai");
+						break;
+					case 3:	
+						printf("ba");
+						break;
+					case 4:	
+						printf("bon");
+						break;
+					case 5:	
+						printf("nam");
+						break;
+					case 6:	
+						printf("sau");
+						break;
+					case 7:	
+						printf("bay");
+						break;
+					case 8:	
+						printf("tam");
+						break;
+					case 9:	
+						printf("chin");
+						break;
+				}
+				break;
+		}
 	}
-		
-	while (so_tien_rut > 0)
-	{
-		if (so_tien_rut >= 500)
-		{
-			so_tien_rut -= 500;
-			n_500++;
-		}
-		if (so_tien_rut >= 200)
-		{
-			so_tien_rut -= 200;
-			n_200++;
-		}
-		if (so_tien_rut >= 100)
-		{
-			so_tien_rut -= 100;
-			n_100++;
-		}
-		if (so_tien_rut >= 50)
-		{
-			so_tien_rut -= 50;
-			n_50++;
-		}		
-	}
-	printf("Da rut:\n%d to 500k\n%d to 200k\n%d to 100k\n%d to 50k", n_500, n_200, n_100, n_50);
+	
 }
