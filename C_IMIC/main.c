@@ -3,16 +3,20 @@
 
 int main()
 {
-	int a[8] = { 3,6,3,8,5,3,7,5 };
-	int temp = 0, pos = 0;
+	int a[8] = { -3,6,3,-8,5,3,-7,5 };
 	for (int i = 0; i < 8; i++)
 	{
-		if (a[i] > temp)
-		{
-			temp = a[i];
-			pos = i;
-		}			
+		if (a[i] < 0)
+			a[i] = 0;
+		printf("%d ", a[i]);	
 	}
-	printf("So lon nhat la %d\n", temp);
-	printf("Tai vi tri %d trong mang", pos);
+
+	printf("\nSo am da doi thanh 0, tai cac vi tri: ");
+
+	for (int i = 0; i < 8; i++)
+	{
+		if (a[i] == 0)
+			printf("%d ", i);
+	}
+
 }
