@@ -1,17 +1,18 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <stdlib.h>
 
 int main()
 {
-	//Cap phat tinh
-	int a[12], s = 0;
-	for (int i = 0; i < 12; i++)
+	int a[8] = { 3,6,3,8,5,3,7,5 };
+	int temp = 0, pos = 0;
+	for (int i = 0; i < 8; i++)
 	{
-		printf("Nhap so thu %d: ", i);
-		scanf("%d", &a[i]);
-		if (a[i] % 2 != 0)
-			s += a[i];
+		if (a[i] > temp)
+		{
+			temp = a[i];
+			pos = i;
+		}			
 	}
-	printf("%d", s);
+	printf("So lon nhat la %d\n", temp);
+	printf("Tai vi tri %d trong mang", pos);
 }
