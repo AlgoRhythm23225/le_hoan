@@ -1,26 +1,23 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-void cap(char str[])
+int count_space(char str[])
 {
-	int n = 0;
+	int n = 0, k = 0;
 	while (str[n] != 0)
 	{
+		if (str[n] == ' ' && n != 0)
+			k++;
 		n++;
 	}
-	for (int i = 0; i < n; i++)
-	{
-		if (str[i] >= 'a' && str[i] <= 'z')
-			str[i] -= 32;
-	}
+	return k + 1;
 }
 
 
 int main()
 {
-	char str[100];
-	printf("Enter something: ");
+	char str[50];
 	scanf(" %[^\n]", str);
-	cap(str);
-	printf("%s", str);
+	int k = count_space(str);
+	printf("Cau tren co %d tu", k);
 }
