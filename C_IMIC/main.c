@@ -1,37 +1,32 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-void pos_swap(int arr[], int a, int b)
+void sort(int arr[])
 {
-	int temp1 = 0, pos1 = 0, temp2 = 0, pos2 = 0;
+	int temp = 0;
 	for (int i = 0; i < 14; i++)
 	{
-		if (arr[i] == a)
+		for (int j = i; j < 14; j++)
 		{
-			temp1 = a;
-			pos1 = i;
-		}
-		if (arr[i] == b)
-		{
-			temp2 = b;
-			pos2 = i;
+			if (arr[j] < arr[i])
+			{ 
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
 		}
 	}
-	arr[pos1] = temp2;
-	arr[pos2] = temp1;
 }
 
 int main()
 {
 	int arr[] = { 1,4,2,6,8,7,0,12,14,17,19,25,74,58 };
-	int a, b;
-	for (int i = 0;i<14;i++)
-	{ 
+	for (int i = 0; i < 14; i++)
+	{
 		printf("%d ", arr[i]);
-	}
-	printf("\nNhap 2 so trong mang ban muon thay doi vi tri: ");
-	scanf("%d%d", &a, &b);
-	pos_swap(arr, a, b);
+	}	
+	sort(arr);
+	printf("\n");
 	for (int i = 0; i < 14; i++)
 	{
 		printf("%d ", arr[i]);
