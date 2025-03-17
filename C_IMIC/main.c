@@ -1,26 +1,30 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-void first_letter_caps(char str[])
+void find_c(char str[])
 {
 	int n = 0, k = 0;
+	int pos[50];
 	while (str[n] != 0)
 	{
-		if (str[n] == ' ')
-			str[n + 1] -= 32;
-		if (str[n] >= 'A' && str[n] <= 'Z' && str[n - 1] != ' ')
-			str[n] += 32;
+		if (str[n] == 'c' || str[n] == 'C')
+		{
+			k++;
+			pos[k] = n;
+		}
 		n++;
 	}
-	if (str[0] >= 'a' && str[0] <= 'z')
-		str[0] -= 32;
+	printf("Co %d ky tu c\nTai cac vi tri: ", k);
+		for (int i = 1; i <= k; i++)
+		{
+			printf("%d ", pos[i]);
+		}
 }
-
 
 int main()
 {	
 	char str[50];
+	int pos[50];
 	scanf(" %[^\n]", str);
-	first_letter_caps(str);
-	printf("%s", str);
+	find_c(str);
 }
