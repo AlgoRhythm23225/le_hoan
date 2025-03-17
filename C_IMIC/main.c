@@ -1,34 +1,24 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-void sort(int arr[])
+int count(char str[])
 {
-	int temp = 0;
-	for (int i = 0; i < 14; i++)
+	int n = 0;
+	while (str[n] != 0)
 	{
-		for (int j = i; j < 14; j++)
-		{
-			if (arr[j] < arr[i])
-			{ 
-				temp = arr[i];
-				arr[i] = arr[j];
-				arr[j] = temp;
-			}
-		}
+		n++;
 	}
+	return n;
 }
 
-int main()
+int main() 
 {
-	int arr[] = { 1,4,2,6,8,7,0,12,14,17,19,25,74,58 };
-	for (int i = 0; i < 14; i++)
+	char str[50];
+	while (1)
 	{
-		printf("%d ", arr[i]);
-	}	
-	sort(arr);
-	printf("\n");
-	for (int i = 0; i < 14; i++)
-	{
-		printf("%d ", arr[i]);
+		printf("Nhap chuoi: ");
+		scanf(" %[^\n]", &str);
+		int n = count(str);
+		printf("%d\n", n);
 	}
 }
