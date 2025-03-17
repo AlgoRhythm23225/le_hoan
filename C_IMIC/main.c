@@ -3,12 +3,14 @@
 
 int count(char str[])
 {
-	int n = 0;
+	int n = 0, k = 0;
 	while (str[n] != 0)
 	{
+		if (str[n] == ' ')
+			k++;
 		n++;
 	}
-	return n;
+	return k;
 }
 
 int main() 
@@ -18,7 +20,7 @@ int main()
 	{
 		printf("Nhap chuoi: ");
 		scanf(" %[^\n]", &str);
-		int n = count(str);
-		printf("%d\n", n);
+		int k = count(str);
+		printf("%d\n", k);
 	}
 }
