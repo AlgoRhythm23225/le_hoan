@@ -1,26 +1,26 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-int count(char str[])
+void cap(char str[])
 {
-	int n = 0, k = 0;
+	int n = 0;
 	while (str[n] != 0)
 	{
-		if (str[n] == ' ')
-			k++;
 		n++;
 	}
-	return k;
+	for (int i = 0; i < n; i++)
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')
+			str[i] -= 32;
+	}
 }
 
-int main() 
+
+int main()
 {
-	char str[50];
-	while (1)
-	{
-		printf("Nhap chuoi: ");
-		scanf(" %[^\n]", &str);
-		int k = count(str);
-		printf("%d\n", k);
-	}
+	char str[100];
+	printf("Enter something: ");
+	scanf(" %[^\n]", str);
+	cap(str);
+	printf("%s", str);
 }
