@@ -1,30 +1,32 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-void find_c(char str[])
+//Function: find postion of a string on a larger string
+//Input: Origin string, size of origin string, string need to find, sinze of that string
+//Output: Position of that string
+int subStr(char* str, int size_str, char* sub, int size_sub)
 {
-	int n = 0, k = 0;
-	int pos[50];
-	while (str[n] != 0)
+	for (int i = 0; i < size_str; i++)
 	{
-		if (str[n] == 'c' || str[n] == 'C')
+		int n = 0;
+		while (str[i + n] == sub[n])
 		{
-			k++;
-			pos[k] = n;
+			n++;
+			if (n == size_sub && str[i+n] ==' ')
+				return i;
 		}
-		n++;
 	}
-	printf("Co %d ky tu c\nTai cac vi tri: ", k);
-		for (int i = 1; i <= k; i++)
-		{
-			printf("%d ", pos[i]);
-		}
+	return -1;
 }
 
 int main()
-{	
-	char str[50];
-	int pos[50];
-	scanf(" %[^\n]", str);
-	find_c(str);
+{
+	char str[] = "Xin chao cac ban";
+	char sub[] = "cac";
+	int size_str = sizeof(str) / sizeof(str[0]) - 1;
+	int size_sub = sizeof(sub) / sizeof(sub[0]) - 1;
+	int i = subStr(str, size_str, sub, size_sub);
+	if (i != -1)
+		printf("Tim thay '%s' tai %d", sub, i);
+	else
+		printf("Khong tim thay '%s'", sub);
 }
