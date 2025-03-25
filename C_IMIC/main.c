@@ -1,35 +1,28 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-struct phan_so
+typedef struct
 {
 	int tu;
 	int mau;
-};
+}phan_so;
 
 //Chuc nang: Nhan 2 phan so
 //Input:
 //Output:
-float nhan_2_phan_so(float phan_so_1, float phan_so_2)
+phan_so NhanPhanSo(phan_so x, phan_so y)
 {
-	float ket_qua = phan_so_1 * phan_so_2;
-	return ket_qua;
+	phan_so kq;
+	kq.tu = x.tu * y.tu;
+	kq.mau = x.mau * y.mau;
+	return kq;
 }
 
 int main()
 {
-	struct phan_so A;
-	struct phan_so B;
+	phan_so A = { 1,2 };
+	phan_so B = { 3,4 };
 	
-	A.tu = 1;
-	A.mau = 2;
-
-	B.tu = 3;
-	B.mau = 4;
-
-	float phan_so_1 = A.tu / A.mau;
-	float phan_so_2 = B.tu / B.mau;
-	float tich = nhan_2_phan_so(phan_so_1, phan_so_2);
-
-	printf("%.2f", tich);
+	phan_so C = NhanPhanSo(A, B);
+	printf("Ket qua:%d/%d \n", C.tu, C.mau);
 }
