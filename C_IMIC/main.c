@@ -1,61 +1,125 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <math.h>
 
 typedef struct
 {
-	char* ten;
-	int tuoi;
-	float diem_toan;
-	float diem_van;
-	float diem_tb;
-	float xep_loai;
-}Hoc_sinh_t;
+	int tu;
+	int mau;
+}phan_so_t;
 
-//Chuc nang: Tinh diem trung binh va xep loai cua tat ca hoc sinh trong mang
-//Input: 
-//	hoc_sinh_t* hoc_sinh - dia chi bat dau cua mang hoc sinh 
-//	int so_luong - so luong hoc sinh
-//Output: None
-void xepLoai(Hoc_sinh_t* hoc_sinh, int so_luong)
+//Chuc nang: nhan 2 phan so
+//Input: 2 phan so
+//	phan_so_t x
+//	phan_so_t y
+//Output: tich 2 phan so 
+//	phan_so_t kq 
+phan_so_t nhan(phan_so_t x, phan_so_t y)
 {
-
-	for (int i = 0; i < so_luong; i++)
-	{
-		hoc_sinh[i].diem_tb = (hoc_sinh[i].diem_toan + hoc_sinh[i].diem_van) / 2;
-		if (hoc_sinh[i].diem_tb >= 8.0)
-			hoc_sinh[i].xep_loai = 0;
-		else if (hoc_sinh[i].diem_tb >= 6.5)
-			hoc_sinh[i].xep_loai = 1;
-		else if (hoc_sinh[i].diem_tb >= 5.0)
-			hoc_sinh[i].xep_loai = 2;
-		else hoc_sinh[i].xep_loai = 3;		 
-	}
+	phan_so_t kq;
+	kq.tu = x.tu * y.tu;
+	kq.mau = x.mau * y.mau;
+	return kq;
 }
 
-//Chuc nang: Tim hoc sinh co diem trung binh cao nhat
-//Input: 
-//	hoc_sinh_t* hoc_sinh - dia chi bat dau cua mang hoc sinh 
-//	int so_luong - so luong hoc sinh
-//Output: (hoc_sinh_t)
-char MVP(Hoc_sinh_t* hoc_sinh, int so_luong)
+//Chuc nang: chia 2 phan so
+//Input: 2 phan so
+//	phan_so_t x
+//	phan_so_t y
+//Output: thuong 2 phan so 
+//	phan_so_t kq 
+phan_so_t chia(phan_so_t x, phan_so_t y)
 {
-	float diem_tb_max = 0;
-	int vi_tri = 0;
-	for (int i = 0; i < so_luong; i++)
+	phan_so_t kq;
+	kq.tu = x.tu * y.mau;
+	kq.mau = x.mau * y.tu;
+	return kq;
+}
+
+//Chuc nang: cong 2 phan so
+//Input: 2 phan so
+//	phan_so_t x
+//	phan_so_t y
+//Output: tong 2 phan so 
+//	phan_so_t kq 
+phan_so_t cong(phan_so_t x, phan_so_t y)
+{
+	phan_so_t kq;
+		kq.tu = x.tu * y.mau + y.tu * x.mau;
+		kq.mau = x.mau * y.mau;	
+		return kq;
+}
+
+//Chuc nang: Tru 2 phan so
+//Input: 2 phan so
+//	phan_so_t x
+//	phan_so_t y
+//Output: Hieu 2 phan so 
+//	phan_so_t kq 
+phan_so_t tru(phan_so_t x, phan_so_t y)
+{
+	phan_so_t kq;
+	kq.tu = x.tu * y.mau - y.tu * x.mau;
+	kq.mau = x.mau * y.mau;
+	return kq;
+}
+
+//Chuc nang: Rut gon
+//Input: 2 phan so
+//	phan_so_t x
+//	phan_so_t y
+//Output: Phan so da duoc rut gon 
+//	phan_so_t kq 
+phan_so_t rut_gon(phan_so_t x)
+{
+	phan_so_t kq;
+	int min = 0;
+
+	kq.tu = x.tu;
+	kq.mau = x.mau;
+
+	if (abs(x.tu) > abs(x.mau))
+		min = abs(x.mau);
+	else min = abs(x.tu);
+	
+	for (int i = 2; i <= min; i++)
 	{
-		if (hoc_sinh[i].diem_tb > diem_tb_max)
-			diem_tb_max = hoc_sinh[i].diem_tb;
-		vi_tri = i;
+		while (kq.tu % i == 0 && kq.mau % i == 0)
+		{
+			kq.tu /= i;
+			kq.mau /= i;
+		}
 	}
-	printf("%s", hoc_sinh[vi_tri].ten);
+	return kq;
 }
 
 int main()
 {
-	Hoc_sinh_t hoc_sinh[] = {
-		{"Quang", 15, 8, 9,},
-		{"Duc", 14, 6, 9},
-		{"Linh", 15, 6, 7.5},
-		{"Mai", 14, 8.6, 4}
-	};
+	phan_so_t a = { 12,16 };
+	phan_so_t b = { 34,26 };
+
+	printf("Phan so a: %d/%d\n", a.tu, a.mau);
+	printf("Phan so b: %d/%d\n", b.tu, b.mau);
+
+	phan_so_t kq = nhan(a, b);
+	kq = rut_gon(kq);
+	printf("Nhan: %d/%d\n", kq.tu, kq.mau);
+
+	kq = chia(a, b);
+	kq = rut_gon(kq);
+	printf("Chia: %d/%d\n", kq.tu, kq.mau);
+
+	kq = cong(a, b);
+	kq = rut_gon(kq);
+	printf("Cong: %d/%d\n", kq.tu, kq.mau);
+
+	kq = tru(a, b);
+	kq = rut_gon(kq);
+	printf("Tru: %d/%d\n", kq.tu, kq.mau);
+
+	kq = rut_gon(a);
+	printf("Rut gon a: %d/%d\n", kq.tu, kq.mau);
+	
+	kq = rut_gon(b);
+	printf("Rut gon b: %d/%d\n", kq.tu, kq.mau);
 }
