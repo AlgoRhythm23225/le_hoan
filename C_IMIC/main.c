@@ -51,6 +51,8 @@ int main()
 	in_danh_sach(hocsinh, n);
 	in_top_1(hocsinh, n);
 	in_sort(hocsinh, n);
+
+	free(hocsinh);
 }
 
 void in_danh_sach(hoc_sinh_t* hocsinh,int so_luong)
@@ -63,8 +65,12 @@ void in_danh_sach(hoc_sinh_t* hocsinh,int so_luong)
 		printf("Gioi tinh: %s\n", hocsinh[i].gioi_tinh);
 		printf("Diem toan: %.1f\n", hocsinh[i].diem_toan);
 		printf("Diem van: %.1f\n", hocsinh[i].diem_van);
+
+		//Tinh và in diem trung binh
 		hocsinh[i].diem_tb = (hocsinh[i].diem_toan + hocsinh[i].diem_van) / 2;
 		printf("Diem trung binh: %.1f\n", hocsinh[i].diem_tb);
+		
+		//In xep loai dua tren diem trung binh
 		if (hocsinh[i].diem_tb >= 8)
 			printf("Xep loai: Gioi");
 		else if (hocsinh[i].diem_tb >= 6.5)
@@ -109,13 +115,12 @@ void in_sort(hoc_sinh_t* hocsinh, int so_luong)
 				//Doi vi tri ten
 				strcpy(temp_ten, hocsinh[i].ten);
 				strcpy(hocsinh[i].ten, hocsinh[j].ten);
-				strcpy(hocsinh[j].ten, temp_ten);
-
-				
+				strcpy(hocsinh[j].ten, temp_ten);				
 			}
 		}
 	}
 
+	//In danh sach da duoc sap xep
 	for (int i = 0; i < so_luong; i++)
 	{
 		printf("%d. %s %.1f\n", i + 1, hocsinh[i].ten, hocsinh[i].diem_tb);
