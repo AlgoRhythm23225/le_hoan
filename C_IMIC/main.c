@@ -1,125 +1,123 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct
 {
-	int tu;
-	int mau;
-}phan_so_t;
+	char ten[40];
+	int tuoi;
+	char gioi_tinh[6];
+	float diem_toan;
+	float diem_van;
+	float diem_tb;
+	int xep_loai;
+}hoc_sinh_t;
 
-//Chuc nang: nhan 2 phan so
-//Input: 2 phan so
-//	phan_so_t x
-//	phan_so_t y
-//Output: tich 2 phan so 
-//	phan_so_t kq 
-phan_so_t nhan(phan_so_t x, phan_so_t y)
-{
-	phan_so_t kq;
-	kq.tu = x.tu * y.tu;
-	kq.mau = x.mau * y.mau;
-	return kq;
-}
-
-//Chuc nang: chia 2 phan so
-//Input: 2 phan so
-//	phan_so_t x
-//	phan_so_t y
-//Output: thuong 2 phan so 
-//	phan_so_t kq 
-phan_so_t chia(phan_so_t x, phan_so_t y)
-{
-	phan_so_t kq;
-	kq.tu = x.tu * y.mau;
-	kq.mau = x.mau * y.tu;
-	return kq;
-}
-
-//Chuc nang: cong 2 phan so
-//Input: 2 phan so
-//	phan_so_t x
-//	phan_so_t y
-//Output: tong 2 phan so 
-//	phan_so_t kq 
-phan_so_t cong(phan_so_t x, phan_so_t y)
-{
-	phan_so_t kq;
-		kq.tu = x.tu * y.mau + y.tu * x.mau;
-		kq.mau = x.mau * y.mau;	
-		return kq;
-}
-
-//Chuc nang: Tru 2 phan so
-//Input: 2 phan so
-//	phan_so_t x
-//	phan_so_t y
-//Output: Hieu 2 phan so 
-//	phan_so_t kq 
-phan_so_t tru(phan_so_t x, phan_so_t y)
-{
-	phan_so_t kq;
-	kq.tu = x.tu * y.mau - y.tu * x.mau;
-	kq.mau = x.mau * y.mau;
-	return kq;
-}
-
-//Chuc nang: Rut gon
-//Input: 2 phan so
-//	phan_so_t x
-//	phan_so_t y
-//Output: Phan so da duoc rut gon 
-//	phan_so_t kq 
-phan_so_t rut_gon(phan_so_t x)
-{
-	phan_so_t kq;
-	int min = 0;
-
-	kq.tu = x.tu;
-	kq.mau = x.mau;
-
-	if (abs(x.tu) > abs(x.mau))
-		min = abs(x.mau);
-	else min = abs(x.tu);
-	
-	for (int i = 2; i <= min; i++)
-	{
-		while (kq.tu % i == 0 && kq.mau % i == 0)
-		{
-			kq.tu /= i;
-			kq.mau /= i;
-		}
-	}
-	return kq;
-}
+//Chuc nang	: In danh sach hoc sinh
+//Input		: hocsinh, n 
+//Output	: -  
+void in_danh_sach(hoc_sinh_t* hocsinh, int so_luong);
+//Chuc nang	: In hoc sinh top 1
+//Input		: hocsinh, n 
+//Output	: -  
+void in_top_1(hoc_sinh_t* hocsinh, int so_luong);
+//Chuc nang	: In danh sanh xep hang theo diem trung binh
+//Input		: hocsinh, n 
+//Output	: -  
+void in_sort(hoc_sinh_t* hocsinh, int so_luong);
 
 int main()
 {
-	phan_so_t a = { 12,16 };
-	phan_so_t b = { 34,26 };
+	int n;
+	printf("Nhap so hoc sinh: ");
+	scanf("%d", &n);
+	hoc_sinh_t* hocsinh = (hoc_sinh_t*)malloc(n * sizeof(hoc_sinh_t));
+	for (int i = 0; i < n; i++)
+	{
+		printf("Nhap hoc sinh thu %d: ", i + 1);
+		scanf(" %[^\n]", hocsinh[i].ten);
+		printf("Nhap tuoi: ");
+		scanf("%d", &hocsinh[i].tuoi);
+		printf("Gioi tinh: ");
+		scanf("%s", hocsinh[i].gioi_tinh);
+		printf("Diem toan: ");
+		scanf("%f", &hocsinh[i].diem_toan);
+		printf("Diem van: ");
+		scanf("%f", &hocsinh[i].diem_van);
+		printf("\n");
+	}
 
-	printf("Phan so a: %d/%d\n", a.tu, a.mau);
-	printf("Phan so b: %d/%d\n", b.tu, b.mau);
+	in_danh_sach(hocsinh, n);
+	in_top_1(hocsinh, n);
+	in_sort(hocsinh, n);
+}
 
-	phan_so_t kq = nhan(a, b);
-	kq = rut_gon(kq);
-	printf("Nhan: %d/%d\n", kq.tu, kq.mau);
+void in_danh_sach(hoc_sinh_t* hocsinh,int so_luong)
+{
+	for (int i = 0; i < so_luong; i++)
+	{
+		printf("Hoc sinh thu %d:\n",i + 1);
+		printf("Ten: %s\n", hocsinh[i].ten);
+		printf("Tuoi: %d\n", hocsinh[i].tuoi);
+		printf("Gioi tinh: %s\n", hocsinh[i].gioi_tinh);
+		printf("Diem toan: %.1f\n", hocsinh[i].diem_toan);
+		printf("Diem van: %.1f\n", hocsinh[i].diem_van);
+		hocsinh[i].diem_tb = (hocsinh[i].diem_toan + hocsinh[i].diem_van) / 2;
+		printf("Diem trung binh: %.1f\n", hocsinh[i].diem_tb);
+		if (hocsinh[i].diem_tb >= 8)
+			printf("Xep loai: Gioi");
+		else if (hocsinh[i].diem_tb >= 6.5)
+			printf("Xep loai: Kha");
+		else if (hocsinh[i].diem_tb >= 5)
+			printf("Xep loai: Trung binh");
+		else printf("Xep loai: Yeu");
+		printf("\n\n");
+	}
+}
 
-	kq = chia(a, b);
-	kq = rut_gon(kq);
-	printf("Chia: %d/%d\n", kq.tu, kq.mau);
+void in_top_1(hoc_sinh_t* hocsinh, int so_luong)
+{
+	float diem_tb_max = 0;
+	int vi_tri = 0;
+	for (int i = 0; i < so_luong; i++)
+	{
+		if (hocsinh[i].diem_tb > diem_tb_max)
+		{
+			diem_tb_max = hocsinh[i].diem_tb;
+			vi_tri = i;
+		}
+	}
+	printf("Hoc sinh %s co diem trung binh cao nhat la: %.1f\n\n", hocsinh[vi_tri].ten, diem_tb_max);
+}
 
-	kq = cong(a, b);
-	kq = rut_gon(kq);
-	printf("Cong: %d/%d\n", kq.tu, kq.mau);
+void in_sort(hoc_sinh_t* hocsinh, int so_luong)
+{
+	for (int i = 0; i < so_luong; i++)
+	{
+		for (int j = i + 1; j < so_luong; j++)
+		{
+			char temp_ten[40] = " ";
+			float temp_diem_tb = 0;
+			if (hocsinh[j].diem_tb > hocsinh[i].diem_tb)
+			{
+				//Doi vi tri diem trung binh
+				temp_diem_tb = hocsinh[i].diem_tb;
+				hocsinh[i].diem_tb = hocsinh[j].diem_tb;
+				hocsinh[j].diem_tb = temp_diem_tb;
+				
+				//Doi vi tri ten
+				strcpy(temp_ten, hocsinh[i].ten);
+				strcpy(hocsinh[i].ten, hocsinh[j].ten);
+				strcpy(hocsinh[j].ten, temp_ten);
 
-	kq = tru(a, b);
-	kq = rut_gon(kq);
-	printf("Tru: %d/%d\n", kq.tu, kq.mau);
+				
+			}
+		}
+	}
 
-	kq = rut_gon(a);
-	printf("Rut gon a: %d/%d\n", kq.tu, kq.mau);
-	
-	kq = rut_gon(b);
-	printf("Rut gon b: %d/%d\n", kq.tu, kq.mau);
+	for (int i = 0; i < so_luong; i++)
+	{
+		printf("%d. %s %.1f\n", i + 1, hocsinh[i].ten, hocsinh[i].diem_tb);
+	}
 }
