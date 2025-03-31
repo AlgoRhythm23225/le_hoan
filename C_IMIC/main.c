@@ -6,37 +6,30 @@
 int main() {
 	linked_list_t ll = { 0 };
 
-	add_node(&ll, 50);
+	add_node(&ll, 15);
 	add_node(&ll, 25);
-	add_node(&ll, 66);
-	add_node(&ll, 463);
-	add_node(&ll, 745);
+	add_node(&ll, 45);
+	add_node(&ll, 5);
+	add_node(&ll, 85);
 
-	printf("Linked list co %d node\n", get_len(&ll));
+	printf("Origin Len = %d: \n", get_len(&ll));
+	list_node(&ll);
+	printf("Address of 85 is: %p\n", search_node(&ll, 85));
+	printf("Value of last node is: %d\n", get_value_last_node(&ll));
 
-	int x = get_value(&ll, 3);
-	printf("Lay gia tri tai vi tri thu 3: %d\n", x);
+	insert_node(&ll, 3, 75);
+	printf("Insert 75 at index 3: \n");
+	list_node(&ll);
 
-	printf("Linked list: \n");
-	print_list(&ll);
-	
-	printf("Insert\n");
-	insert_node(&ll, 3, 13);
-	print_list(&ll);
-
-	printf("Remove last node\n");
 	remove_last_node(&ll);
-	print_list(&ll);
+	printf("Remove last node: \n");
+	list_node(&ll);
 
-	printf("Remove\n");
-	remove_node(&ll, 2);
-	print_list(&ll);
-
-	int ptr = search_node(&ll, 463);
-	printf("%d\n", ptr);
-
-	printf("Last node value = %d", get_value_last_node(&ll));
+	remove_index(&ll, 2);
+	printf("Remove node at index 2: \n");
+	list_node(&ll);
 
 	delete_all(&ll);
-	print_list(&ll);
+	printf("Wipe them all: \n");
+	list_node(&ll);
 }
