@@ -1,39 +1,42 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include "Linked_List.h"
 
-int	xu_ly_chuoi(char* str_format)
-{
-	char* tu_khoa = "led_2: ";
-	char* a;
-	a = strstr(str_format, tu_khoa);
-	a += strlen(tu_khoa);
-	int i = 0;
-	while (a[i] != ',')
-	{
-		i++;
-	}
+int main() {
+	linked_list_t ll = { 0 };
 
-	char* str = malloc(i + 1);
-	memset(str, 0, i + 1);
-	memcpy(str, a, i);
+	add_node(&ll, 50);
+	add_node(&ll, 25);
+	add_node(&ll, 66);
+	add_node(&ll, 463);
+	add_node(&ll, 745);
 
-	if (strcmp(str, "on") == 0)
+	printf("Linked list co %d node\n", get_len(&ll));
 
-	{
-		free(str)
-		return 1;
-	}
-	else if (strcmp(str, "off") == 0)
-		return 0;
+	int x = get_value(&ll, 3);
+	printf("Lay gia tri tai vi tri thu 3: %d\n", x);
+
+	printf("Linked list: \n");
+	print_list(&ll);
 	
+	printf("Insert\n");
+	insert_node(&ll, 3, 13);
+	print_list(&ll);
 
+	printf("Remove last node\n");
+	remove_last_node(&ll);
+	print_list(&ll);
+
+	printf("Remove\n");
+	remove_node(&ll, 2);
+	print_list(&ll);
+
+	int ptr = search_node(&ll, 463);
+	printf("%d\n", ptr);
+
+	printf("Last node value = %d", get_value_last_node(&ll));
+
+	delete_all(&ll);
+	print_list(&ll);
 }
-
-int main()
-{
-	char* str = "led_1: on, led_2: off, led_3: on";
-	xu_ly_chuoi(str);
-}
-
