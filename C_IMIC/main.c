@@ -1,142 +1,69 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <stdlib.h>
+
+typedef enum {
+	NAM,
+	NU
+}gioi_tinh_t;
+char* convert_gioiTinh_string[] = { "Nam","Nu" };
+
+typedef enum {
+	GIOI,
+	KHA,
+	TRUNG_BINH,
+	YEU
+}loai_t;
+char* convert_loai_string[] = { "Gioi", "Kha", "Trung binh", "Yeu" };
 
 typedef struct {
-	int value;
-	void* previous_node;
-}node_t;
+	char* ten;
+	int tuoi;
+	gioi_tinh_t gioi_tinh;
+	float diem_toan;
+	float diem_van;
+	loai_t loai;
+}hoc_sinh_t;
 
-typedef struct {
-	int len;
-	node_t * last_node;
-}linked_list_t;
-
-int get_len(linked_list_t* ll) {
-	return ll->len;
+void xep_loai(hoc_sinh_t* arr, int so_luong) {
+	float TB = 0;
+	for (int i = 0; i < so_luong; i++) {
+		TB = (arr[i].diem_toan + arr[i].diem_van) / 2;
+		if (TB >= 8)
+			arr[i].loai = GIOI;
+		else if (TB>=6.5)
+			arr[i].loai = KHA;
+		else if (TB>=5)
+			arr[i].loai = TRUNG_BINH;
+		else
+			arr[i].loai = YEU;			
+	}	
 }
 
-void add_node(linked_list_t* ll, int val) {
-	node_t* node = malloc(sizeof(node_t));
-	node->value = val;
-	if (ll->len > 0)
-		node->previous_node = ll->last_node;
-	else
-		node->previous_node = 0;
-	ll->last_node = node;
-	ll->len++;
-}
-
-void insert_node(linked_list_t* ll, int index, int val) {
-	node_t* node = malloc(sizeof(node_t));
-	node->previous_node = ll->last_node;
-	node->value = val;
-	for (int i = ll->len - 1; i > index - 1; i--) {
-		node->previous_node = ((node_t*)node->previous_node)->previous_node;
+void in_ds(hoc_sinh_t* arr, int so_luong) {
+	for (int i = 0; i < 3; i++) {
+		float diem_tb = (arr[i].diem_toan + arr[i].diem_van) / 2;
+		printf("Ten: %s ", arr[i].ten);
+		printf("Tuoi: %d ", arr[i].tuoi);
+		printf("Gioi tinh: %s ", convert_gioiTinh_string[arr[i].gioi_tinh]);
+		printf("Diem toan: %.1f ", arr[i].diem_toan);
+		printf("Diem van: %.1f ", arr[i].diem_van);
+		printf("Diem TB: %.1f ", diem_tb);
+		printf("Xep loai: %s ", convert_loai_string[arr[i].loai]);
+		printf("\n");
 	}
-	node_t* temp = node->previous_node;
-	node->previous_node = temp->previous_node;
-	temp->previous_node = node;
-	ll->len++;
 }
-
-void remove_last_node(linked_list_t* ll) {
-	node_t* temp = ll->last_node;
-	node_t* temp2 = temp->previous_node;
-	free(temp);
-	ll->last_node = temp2;
-	ll->len--;
-}
-
-void remove_node(linked_list_t* ll, int index) {
-	node_t* temp = ll->last_node;
-	for (int i = ll->len - 1; i > index + 1; i--) {
-		temp = temp->previous_node;
-	}
-	node_t* node_to_delete = temp->previous_node;
-	temp->previous_node = node_to_delete->previous_node;
-	free(node_to_delete);
-	ll->len--;
-}
-
-node_t* search_node(linked_list_t* ll, int val) {
-	node_t* temp = ll->last_node;
-	for (int i = ll->len - 1; i >= 0; i--) {
-		if (temp->value == val)
-			return temp;
-		temp = temp->previous_node;
-	}
-	return NULL;
-}
-
-int get_value(linked_list_t* ll, int index) {
-	node_t* temp = ll->last_node;
-	for (int i = ll->len - 1; i > index; i--) {
-		temp = temp->previous_node;
-	}
-	return temp->value;
-}
-
-int get_value_last_node(linked_list_t* ll) {
-	node_t* temp = ll->last_node;
-	return temp->value;
-}
-void list_node(linked_list_t* ll) {
-	for (int i = ll->len - 1; i >= 0; i--) {
-		printf("%d -> ", get_value(ll, i));
-	}
-	printf("NULL\n");
-}
-
-void delete_all(linked_list_t* ll) {
-	node_t* temp = ll->last_node;
-	for (int i = ll->len - 1; i >= 0; i--) {
-		node_t* temp2 = temp->previous_node;
-		free(temp);
-		temp = temp2;
-	}
-	ll->len = 0;
-}
-
+//arr --> hoc_sinh_t* 
+//*arr -->hoc_sinh_t
+//*(arr+0) --> hoc_sinh_t
+//arr[0] 
 int main() {
-	
-	linked_list_t ll = { 0 };
+	hoc_sinh_t arr[] = {
+		{"Nguyen Van A", 18, NAM, 6.7, 7.4},
+		{"Nguyen Thi B", 18, NU, 8.7, 7.9},
+		{"Nguyen Van C", 18, NAM, 5.7, 5.4}
+	};
 
-	add_node(&ll, 87);
-	add_node(&ll, 55);
-	add_node(&ll, 36);
-	add_node(&ll, 74);
-	add_node(&ll, 18);
-
-	printf("Linked list origin has %d nodes:\n",get_len(&ll));
-	list_node(&ll);
-
-	printf("Insert node 99 at index %d\n",2);
-	insert_node(&ll, 2, 99);
-	list_node(&ll);
-
-	printf("Remove last node\n");
-	remove_last_node(&ll);
-	list_node(&ll);
-
-	printf("Remove node at index 3\n");
-	remove_node(&ll, 3);
-	list_node(&ll);
-
-	//Search
-	int search_value = 32;
-	if (search_node(&ll, search_value))
-		printf("Address of %d is: %p\n",search_value, search_node(&ll, search_value));
-	else
-		printf("Value %d not found!!\n",search_value);
-
-	printf("Value of the last node is: %d\n", get_value_last_node(&ll));
-	
-	printf("Remove them all\n");
-	delete_all(&ll);
-	list_node(&ll);
-
-	printf("Add node to check if all nodes are removed\n");
-	add_node(&ll, 87);
-	list_node(&ll);
+	xep_loai(arr, 3);
+	in_ds(arr, 3);
 }
+
