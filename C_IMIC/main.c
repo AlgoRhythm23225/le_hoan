@@ -7,7 +7,7 @@ typedef struct
 {
 	char ten[50];
 	int tuoi;
-	char gioi_tinh[4];
+	char gioi_tinh[7];
 	float diem_toan;
 	float diem_van;
 	float diem_tb;
@@ -15,10 +15,11 @@ typedef struct
 
 void main()
 {
+	//Mơ file
 	FILE* csv = fopen("DanhSachHocSinh.csv", "r");
 	if (!csv)
 	{
-		printf("Mo file khong thanh cong");
+		printf("Unable to open file");
 		return;
 	}
 	else
@@ -27,52 +28,49 @@ void main()
 	}
 
 	hoc_sinh_t danh_sach[10] = { 0 };
-	hoc_sinh_t line = { 0 };
+	int stt = 0;
 	char c;
 	char buffer[50] = { 0 };
-	char buffer_index = 0;
+	int buffer_index = 0;
 	int field = 0;
-	int stt = 0;
 	while ((c = fgetc(csv)) != EOF)
 	{
 		if (c != ',' && c != '\n')
 		{
 			buffer[buffer_index++] = c;
 		}
-		else 
+		else
 		{
-			buffer[buffer_index] = '\0';
 			switch (field)
 			{
-				case 0:
-					strcpy(line.ten, buffer);
-					break;
-				case 1:
-					line.tuoi = atoi(buffer);
-					break;
-				case 2:
-					strcpy(line.gioi_tinh, buffer);
-					break;
-				case 3:
-					line.diem_toan = atof(buffer);
-					break;
-				case 4:
-					line.diem_van = atof(buffer);
-					break;
+			case 0:
+				strcpy(danh_sach[stt].ten, buffer);
+				break;
+			case 1:
+				danh_sach[stt].tuoi = atoi(buffer);
+				break;
+			case 2:
+				strcpy(danh_sach[stt].gioi_tinh, buffer);
+				break;
+			case 3:
+				danh_sach[stt].diem_toan = atof(buffer);
+				break;
+			case 4:
+				danh_sach[stt].diem_van = atof(buffer);
+				break;
 			}
-			buffer_index = 0;
 			field++;
+			buffer_index = 0;
 			memset(buffer, 0, sizeof(buffer));
 		}
 		if (c == '\n')
 		{
-			line.diem_tb = (line.diem_toan + line.diem_van) / 2;
-			danh_sach[stt++] = line;
-			memset(&line, 0, sizeof(line));
+			danh_sach[stt].diem_tb = (danh_sach[stt].diem_toan + danh_sach[stt].diem_van) / 2;
 			field = 0;
+			stt++;
 		}
-	}
 
+	}
 	//In ra thong tin va tim ra hoc sinh co diem trung binh cao nhat
 	float diem_tb_temp = 0;
 	int index_of_max;
@@ -91,7 +89,7 @@ void main()
 		}
 	}
 	printf("Hoc sinh co diem trung binh cao nhat la %s voi %.1f diem\n\n", danh_sach[index_of_max].ten, danh_sach[index_of_max].diem_tb);
-	
+
 	//Sap xep theo diem trung binh
 	hoc_sinh_t danh_sach_temp = { 0 };
 	for (int i = 0; i < stt; i++)
@@ -134,10 +132,10 @@ void main()
 	for (int i = 0; i < stt; i++)
 	{
 		fprintf(csv_2, "%s,%d,%s,%.1f,%.1f,\n",
-			danh_sach[i].ten, 
-			danh_sach[i].tuoi, 
-			danh_sach[i].gioi_tinh, 
-			danh_sach[i].diem_toan, 
+			danh_sach[i].ten,
+			danh_sach[i].tuoi,
+			danh_sach[i].gioi_tinh,
+			danh_sach[i].diem_toan,
 			danh_sach[i].diem_van);
 	}
 
