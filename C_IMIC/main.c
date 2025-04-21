@@ -1,22 +1,20 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct
 {
-	char* ten;
+	char ten[50];
 	int tuoi;
-	int gioi_tinh;
+	char gioi_tinh[4];
 	float diem_toan;
 	float diem_van;
+	float diem_tb;
 }hoc_sinh_t;
 
 void main()
 {
-	hoc_sinh_t hs = { 0 };
-
-	//Mo file
 	FILE* csv = fopen("DanhSachHocSinh.csv", "r");
 	if (!csv)
 	{
@@ -28,68 +26,120 @@ void main()
 		printf("Mo file thanh cong\n");
 	}
 
-	//read
-	char c; 
-	int comma_cnt = 0; //Dem so dau ',' cua 1 line
-	
-	char buffer_toan[3] = { 0 }; //Luu diem toan cua 1 line
-	int buffer_index_toan = 0; //Index trong buffer toan
-	int diem_toan[6] = { 0 };//Luu diem toan cua 1 file
-	int toan_index = 0;
-
-	char buffer_van[3] = { 0 }; //Luu diem vam cua 1 line
-	int buffer_index_van = 0; //Index trong buffer van
-	int diem_van[6] = { 0 };//Luu diem van cua 1 file
-	int van_index = 0;
-
+	hoc_sinh_t danh_sach[10] = { 0 };
+	hoc_sinh_t line = { 0 };
+	char c;
+	char buffer[50] = { 0 };
+	char buffer_index = 0;
+	int field = 0;
+	int stt = 0;
 	while ((c = fgetc(csv)) != EOF)
 	{
-		while ((c = fgetc(csv)) != '\n')
+		if (c != ',' && c != '\n')
 		{
-			if (c == ',')
-			{
-				comma_cnt++;
-			}
-
-			if (comma_cnt == 3 && c != ',')
-			{
-				buffer_toan[buffer_index_toan] = c;
-				buffer_index_toan++;
-			}	
-			
-			if (comma_cnt == 4 && c != ',')
-			{
-				buffer_van[buffer_index_van] = c;
-				buffer_index_van++;
-			}
+			buffer[buffer_index++] = c;
 		}
-		diem_toan[toan_index] = atoi(buffer_toan);
-		toan_index++;
-		buffer_index_toan = 0;
-		
-		diem_van[van_index] = atoi(buffer_van);
-		van_index++;
-		buffer_index_van = 0;
-
-		comma_cnt = 0;
+		else 
+		{
+			buffer[buffer_index] = '\0';
+			switch (field)
+			{
+				case 0:
+					strcpy(line.ten, buffer);
+					break;
+				case 1:
+					line.tuoi = atoi(buffer);
+					break;
+				case 2:
+					strcpy(line.gioi_tinh, buffer);
+					break;
+				case 3:
+					line.diem_toan = atof(buffer);
+					break;
+				case 4:
+					line.diem_van = atof(buffer);
+					break;
+			}
+			buffer_index = 0;
+			field++;
+			memset(buffer, 0, sizeof(buffer));
+		}
+		if (c == '\n')
+		{
+			line.diem_tb = (line.diem_toan + line.diem_van) / 2;
+			danh_sach[stt++] = line;
+			memset(&line, 0, sizeof(line));
+			field = 0;
+		}
 	}
 
-	float diem_tb[6] = { 0 };
-	float temp = 0;
-	float index;
-	for (int i = 0; i < 5; i++)
+	//In ra thong tin va tim ra hoc sinh co diem trung binh cao nhat
+	float diem_tb_temp = 0;
+	int index_of_max;
+	for (int i = 0; i < stt; i++)
 	{
-		diem_tb[i] = (diem_toan[i] + diem_van[i]) / 2.0f;
-		if (diem_tb[i] > temp)
+		printf("%-14s ", danh_sach[i].ten);
+		printf("%d ", danh_sach[i].tuoi);
+		printf("%-3s ", danh_sach[i].gioi_tinh);
+		printf("%-4.1f ", danh_sach[i].diem_toan);
+		printf("%-4.1f ", danh_sach[i].diem_van);
+		printf("%-4.1f\n", danh_sach[i].diem_tb);
+		if (danh_sach[i].diem_tb > diem_tb_temp)
 		{
-			temp = diem_tb[i];
-			index = i;
+			diem_tb_temp = danh_sach[i].diem_tb;
+			index_of_max = i;
 		}
 	}
-	printf("temp: %.1f - index: %d", temp, index);
-
+	printf("Hoc sinh co diem trung binh cao nhat la %s voi %.1f diem\n\n", danh_sach[index_of_max].ten, danh_sach[index_of_max].diem_tb);
 	
+	//Sap xep theo diem trung binh
+	hoc_sinh_t danh_sach_temp = { 0 };
+	for (int i = 0; i < stt; i++)
+	{
+		for (int j = i; j < stt; j++)
+		{
+			if (danh_sach[j].diem_tb > danh_sach[i].diem_tb)
+			{
+				danh_sach_temp = danh_sach[i];
+				danh_sach[i] = danh_sach[j];
+				danh_sach[j] = danh_sach_temp;
+			}
+		}
+	}
+	printf("Sap xep danh sach theo diem trung binh:\n");
+	for (int i = 0; i < stt; i++)
+	{
+		printf("%-14s ", danh_sach[i].ten);
+		printf("%d ", danh_sach[i].tuoi);
+		printf("%-3s ", danh_sach[i].gioi_tinh);
+		printf("%-4.1f ", danh_sach[i].diem_toan);
+		printf("%-4.1f ", danh_sach[i].diem_van);
+		printf("%-4.1f\n", danh_sach[i].diem_tb);
+	}
+	printf("\n");
 
-	//Dong file
+	//Mo file de write
+	FILE* csv_2 = fopen("DanhSachHocSinh2.csv", "w");
+	if (!csv_2)
+	{
+		printf("Mo file khong thanh cong");
+		return;
+	}
+	else
+	{
+		printf("Mo file DanhSachHocSinh2.csv thanh cong\n");
+	}
+
+	//Ghi du lieu vao file
+	for (int i = 0; i < stt; i++)
+	{
+		fprintf(csv_2, "%s,%d,%s,%.1f,%.1f,\n",
+			danh_sach[i].ten, 
+			danh_sach[i].tuoi, 
+			danh_sach[i].gioi_tinh, 
+			danh_sach[i].diem_toan, 
+			danh_sach[i].diem_van);
+	}
+
 	fclose(csv);
 }
