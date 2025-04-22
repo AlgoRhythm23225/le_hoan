@@ -1,6 +1,15 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-
+//Chuc nang: skip so byte can thiet
+//Input: bien FILE
+//Output: skip n file
+void skip(FILE* bin, int number_of_byte_to_skip)
+{
+	for (int i = 1; i <= number_of_byte_to_skip; i++)
+	{
+		fgetc(bin);
+	}
+}
 void main()
 {
 	FILE* bin = fopen("audio.bin", "r");
@@ -11,26 +20,16 @@ void main()
 	}
 	else printf("Mo file thanh cong\n");
 
-	//Skip 4 byte dau - RIFF
-	for (int i = 1; i <= 4; i++)
-	{
-		fgetc(bin);
-	}
-
+	skip(bin, 4);
 	//Doc 4 byte tiep - Dung luong
 	unsigned char a5 = fgetc(bin);
 	unsigned char a6 = fgetc(bin);
 	unsigned char a7 = fgetc(bin);
 	unsigned char a8 = fgetc(bin);
-
 	unsigned int size = a5 | (a6 << 8) | (a7 << 16) | (a8 << 24);
 	printf("Size of audio.wav = %u bytes\n", size);
 
-	//Skip tiep cho toi byte thu 24
-	for (int i = 9; i <= 24; i++)
-	{
-		fgetc(bin);
-	}
+	skip(bin, 16);
 
 	//Doc Sample Rate
 	unsigned char a25 = fgetc(bin);
