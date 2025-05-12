@@ -15,15 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Linked_List.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hinh_hoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Linked_List.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hinh_hoc.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
