@@ -21,7 +21,7 @@
     <ClCompile Include="Linked_List.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hinh_hoc.cpp">
+    <ClCompile Include="phan_so.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +29,7 @@
     <ClInclude Include="Linked_List.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="hinh_hoc.h">
+    <ClInclude Include="phan_so.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
