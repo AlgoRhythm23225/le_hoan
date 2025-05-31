@@ -1,51 +1,41 @@
-﻿#include <iostream>
-#include <cmath>
+﻿#include <stdio.h>
+#include <string.h>
 
-class phuong_trinh_bac_hai {
-private:
-    float a, b, c;
+typedef struct {
+	char light;
+	char fan;
+	char motor;
+} smartHome_t;
 
-public:
-    phuong_trinh_bac_hai(float a, float b, float c) : a(a), b(b), c(c) {}
+const char* data = "HTTP1.1 200 OK{"
+"\"light\": \"on\","
+"\"fan\" : \"off\","
+"\"motor\" : \"off\"}";
 
-    void solve() {
-        if (a == 0) {
-            if (b == 0) {
-                if (c == 0)
-                    std::cout << "Phuong trinh vo so nghiem.\n";
-                else
-                    std::cout << "Phuong trinh vo nghiem.\n";
-            }
-            else {
-                float x = -c / b;
-                std::cout << "Phuong trinh bac nhat co nghiem: x = " << x << "\n";
-            }
-        }
-        else {
-            float delta = b * b - 4 * a * c;
-            if (delta > 0) {
-                float x1 = (-b + sqrtf(delta)) / (2 * a);
-                float x2 = (-b - sqrtf(delta)) / (2 * a);
-                std::cout << "Phuong trinh co 2 nghiem phan biet:\n";
-                std::cout << "x1 = " << x1 << ", x2 = " << x2 << "\n";
-            }
-            else if (delta == 0) {
-                float x = -b / (2 * a);
-                std::cout << "Phuong trinh co nghiem kep: x = " << x << "\n";
-            }
-            else {
-                std::cout << "Phuong trinh vo nghiem (delta < 0).\n";
-            }
-        }
-    }
-};
+char get_status(const char* keyword, const char* data) {
+	const char* pos = strstr(data, keyword);
+	if (pos) {
+		const char* on_pos = strstr(pos, "\"on\"");
+		if (on_pos && on_pos < strstr(pos, "}")) {
+			return 1;
+		}
+	}
+	return 0;
+}
 
-void main() 
-{
-    float a, b, c;
-    std::cout << "Nhap a, b, c: ";
-    std::cin >> a >> b >> c;
+smartHome_t pair_data(const char* data) {
+	smartHome_t result;
+	result.light = get_status("light", data);
+	result.fan = get_status("fan", data);
+	result.motor = get_status("motor", data);
+	return result;
+}
 
-    phuong_trinh_bac_hai eq(a, b, c);
-    eq.solve();
+void main() {
+	smartHome_t x = pair_data(data);
+
+	// In ra để kiểm tra kết quả
+	printf("Light: %d\n", x.light);
+	printf("Fan: %d\n", x.fan);
+	printf("Motor: %d\n", x.motor);
 }
