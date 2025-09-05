@@ -18,18 +18,15 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Linked_List.c">
+    <ClCompile Include="phan_so.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="phan_so.cpp">
+    <ClCompile Include="hinh_hoc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Linked_List.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="phan_so.h">
+    <ClInclude Include="hinh_hoc.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

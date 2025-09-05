@@ -1,41 +1,21 @@
-﻿#include <stdio.h>
-#include <string.h>
+﻿#include "hinh_hoc.h"
+#include <iostream>
 
-typedef struct {
-	char light;
-	char fan;
-	char motor;
-} smartHome_t;
+using namespace std;
 
-const char* data = "HTTP1.1 200 OK{"
-"\"light\": \"on\","
-"\"fan\" : \"off\","
-"\"motor\" : \"off\"}";
+void main()
+{
+	//Class 1 - Start
+	hinh_chu_nhat_c A;
+	A.dai = 7;
+	A.rong = 5;
 
-char get_status(const char* keyword, const char* data) {
-	const char* pos = strstr(data, keyword);
-	if (pos) {
-		const char* on_pos = strstr(pos, "\"on\"");
-		if (on_pos && on_pos < strstr(pos, "}")) {
-			return 1;
-		}
-	}
-	return 0;
-}
+	cout << "Dien tich hinh A: " << A.tinh_dien_tich() << endl;
+	cout << "Chu vi hinh A: " << A.tinh_chu_vi() << endl;
+	cout << "Size of class hinh_chu_nhat_c: " << sizeof(hinh_chu_nhat_c) << endl;
 
-smartHome_t pair_data(const char* data) {
-	smartHome_t result;
-	result.light = get_status("light", data);
-	result.fan = get_status("fan", data);
-	result.motor = get_status("motor", data);
-	return result;
-}
-
-void main() {
-	smartHome_t x = pair_data(data);
-
-	// In ra để kiểm tra kết quả
-	printf("Light: %d\n", x.light);
-	printf("Fan: %d\n", x.fan);
-	printf("Motor: %d\n", x.motor);
+	//Class 2 - Array
+	hinh_chu_nhat_c B[3];
+	B[0].dai = 2;
+		//...
 }
