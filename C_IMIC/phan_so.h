@@ -1,31 +1,28 @@
-#include <stdio.h>
 #ifndef PHAN_SO_H
 #define PHAN_SO_H
 
-class phan_so
+#include <iostream>
+
+using namespace std;
+
+class phan_so_c
 {
 public:
+	// dac diem
 	int tu;
 	int mau;
-
-	phan_so operator*(phan_so khac);
-	phan_so operator/(phan_so khac);
-	phan_so operator+(phan_so khac);
-	phan_so operator-(phan_so khac);
-	phan_so simplify();
-	void compare(phan_so khac);
-
-
-
-	phan_so(int insert_tu_here, int insert_mau_here)
+	// hanh vi
+	phan_so_c operator*(phan_so_c khac);
+	phan_so_c operator/(phan_so_c khac);
+	phan_so_c operator+(phan_so_c khac);
+	phan_so_c operator-(phan_so_c khac);
+	phan_so_c rut_gon(phan_so_c khac);
+	void operator==(phan_so_c khac);
+	phan_so_c(int tu_so, int mau_so);	
+	phan_so_c();
+	~phan_so_c()
 	{
-		tu = insert_tu_here;
-		mau = insert_mau_here;
-	}
-	phan_so()
-	{
-		tu = 0;
-		mau = 1;
+		cout << "Doi tuong bi giai phong vung nho" << endl;
 	}
 };
 

@@ -21,12 +21,9 @@
     <ClCompile Include="phan_so.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hinh_hoc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="hinh_hoc.h">
+    <ClInclude Include="phan_so.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

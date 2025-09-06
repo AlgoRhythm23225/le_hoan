@@ -1,21 +1,32 @@
-﻿#include "hinh_hoc.h"
-#include <iostream>
-
-using namespace std;
+﻿#include "phan_so.h"
 
 void main()
 {
-	//Class 1 - Start
-	hinh_chu_nhat_c A;
-	A.dai = 7;
-	A.rong = 5;
+	phan_so_c A, B, C, D, E, F, G(2,1);
+	A.tu = 5;
+	A.mau = 14;
 
-	cout << "Dien tich hinh A: " << A.tinh_dien_tich() << endl;
-	cout << "Chu vi hinh A: " << A.tinh_chu_vi() << endl;
-	cout << "Size of class hinh_chu_nhat_c: " << sizeof(hinh_chu_nhat_c) << endl;
+	B.tu = 6;
+	B.mau = 7;
 
-	//Class 2 - Array
-	hinh_chu_nhat_c B[3];
-	B[0].dai = 2;
-		//...
+	C = A * B; 
+	C = C.rut_gon(C);
+
+	D = A / B;
+	D = D.rut_gon(D);
+
+	E = A + B;
+	E = E.rut_gon(E);
+
+	F = A - B; 
+	F = F.rut_gon(F);
+
+	/*cout << "Phan so A: " << A.tu<<"/" << A.mau << endl;
+	cout << "Phan so B: " << B.tu<<"/" << B.mau << endl;
+	cout << "Phan so C = A x B: " << C.tu<<"/" << C.mau << endl;
+	cout << "Phan so D = A / B: " << D.tu<<"/" << D.mau << endl;
+	cout << "Phan so E = A + B: " << E.tu<<"/" << E.mau << endl;
+	cout << "Phan so F = A - B: " << F.tu<<"/" << F.mau << endl;*/
+	
+	
 }
